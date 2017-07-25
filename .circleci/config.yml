@@ -37,4 +37,7 @@ jobs:
       
       - run: npm install  hexo-cli
 
+      - run: git config --global user.email "wanzhi@google.com"
+      - run: git config --global user.name "bb8"
+
       - run: node_modules/hexo-cli/bin/hexo deploy
