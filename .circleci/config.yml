@@ -27,7 +27,7 @@ jobs:
           - v1-dependencies-
 
       - run: yarn config list
-      - run: yarn install
+      - run: npm install
 
 
       - save_cache:
@@ -35,6 +35,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       
-      - run: yarn global add hexo-cli
+      - run: npm install  hexo-cli -g 
 
       - run: hexo-cli deploy
