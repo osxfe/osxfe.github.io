@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[使用说明]]></title>
+    <url>%2F2017%2F07%2F25%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[请按以下步骤发表博文: 1、全局安装hexo1$ npm install hexo -g 2、Clone 源代码master分支存放编译后的代码（html, js, css）,该分支不要改动。source分支存放源代码包含Markdown文件, 需要编写发布博文,请先切换到该分支。 仓库地址:&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/osxfe/osxfe.github.io 3、新建博文1$ hexo new "My New Blog" 4、本地调试1$ hexo server 5、生成静态文件1$ hexo generate 6、发布1$ hexo deploy]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[React+Vue]]></title>
     <url>%2F2017%2F07%2F17%2FReact%2BVue%2F</url>
     <content type="text"></content>
@@ -19,10 +24,5 @@
         <tag>ES6</tag>
         <tag>JS</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2017%2F07%2F13%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
 </search>
