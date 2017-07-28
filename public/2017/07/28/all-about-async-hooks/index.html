@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="-node -async_hooks," />
 
 
 
@@ -93,12 +93,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="OSXFE">
-<meta property="og:url" content="http://yoursite.com/tags/JS/index.html">
+<meta name="description" content="本篇文章意图对async_hooks做较为详细的分析，并介绍一些使用案例. async_hooks介绍async_hooks使用案例">
+<meta name="keywords" content="-node -async_hooks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="async_hooks解析">
+<meta property="og:url" content="http://yoursite.com/2017/07/28/all-about-async-hooks/index.html">
 <meta property="og:site_name" content="OSXFE">
+<meta property="og:description" content="本篇文章意图对async_hooks做较为详细的分析，并介绍一些使用案例. async_hooks介绍async_hooks使用案例">
+<meta property="og:updated_time" content="2017-07-27T05:47:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OSXFE">
+<meta name="twitter:title" content="async_hooks解析">
+<meta name="twitter:description" content="本篇文章意图对async_hooks做较为详细的分析，并介绍一些使用案例. async_hooks介绍async_hooks使用案例">
 
 
 
@@ -126,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/JS/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/28/all-about-async-hooks/"/>
 
 
 
 
 
-  <title>标签: JS | OSXFE</title>
+  <title>async_hooks解析 | OSXFE</title>
   
 
 
@@ -157,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -285,44 +290,174 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h1>JS<small>标签</small>
-      </h1>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/28/all-about-async-hooks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="osxfe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OSXFE">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">async_hooks解析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+            <span class="post-meta-item-text">作者: Wanzhi Du </span>
+            <span class="post-meta-divider">|</span>
+            
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-28T23:00:30+08:00">
+                2017-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>本篇文章意图对async_hooks做较为详细的分析，并介绍一些使用案例.</p>
+<h2 id="async-hooks介绍"><a href="#async-hooks介绍" class="headerlink" title="async_hooks介绍"></a>async_hooks介绍</h2><h2 id="async-hooks使用案例"><a href="#async-hooks使用案例" class="headerlink" title="async_hooks使用案例"></a>async_hooks使用案例</h2>
+      
+    </div>
 
-      <h2 class="post-title">
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/07/17/ES6进阶/" itemprop="url">
-              
-                <span itemprop="name">ES6进阶</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-17T20:33:51+08:00"
-              content="2017-07-17" >
-          07-17
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/node-async-hooks/" rel="tag"># -node -async_hooks</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/25/guide-paper/" rel="next" title="使用说明">
+                <i class="fa fa-chevron-left"></i> 使用说明
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -330,6 +465,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -350,8 +489,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/logo.png"
@@ -413,6 +561,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#async-hooks介绍"><span class="nav-number">1.</span> <span class="nav-text">async_hooks介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#async-hooks使用案例"><span class="nav-number">2.</span> <span class="nav-text">async_hooks使用案例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -533,10 +697,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-07-26T12:40:04.000Z</updated>
+  <updated>2017-07-27T05:47:31.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>async_hooks解析</title>
+    <link href="http://yoursite.com/2017/07/28/all-about-async-hooks/"/>
+    <id>http://yoursite.com/2017/07/28/all-about-async-hooks/</id>
+    <published>2017-07-28T15:00:30.000Z</published>
+    <updated>2017-07-27T05:47:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本篇文章意图对async_hooks做较为详细的分析，并介绍一些使用案例.</p>
+<h2 id="async-hooks介绍"><a href="#async-hooks介绍" class="headerlink" title="async_hooks介绍"></a>async_hooks介绍</h2><h2 id="async-hooks使用案例"><a href="#async-hooks使用案例" class="headerlink" title="async_hooks使用案例"></a>async_hooks使用案例</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本篇文章意图对async_hooks做较为详细的分析，并介绍一些使用案例.&lt;/p&gt;
+&lt;h2 id=&quot;async-hooks介绍&quot;&gt;&lt;a href=&quot;#async-hooks介绍&quot; class=&quot;headerlink&quot; title=&quot;async_hooks介绍&quot;&gt;&lt;/a&gt;as
+    
+    </summary>
+    
+      <category term="node" scheme="http://yoursite.com/categories/node/"/>
+    
+    
+      <category term="-node -async_hooks" scheme="http://yoursite.com/tags/node-async-hooks/"/>
+    
+  </entry>
   
   <entry>
     <title>使用说明</title>
@@ -47,7 +71,7 @@
     <link href="http://yoursite.com/2017/07/17/React+Vue/"/>
     <id>http://yoursite.com/2017/07/17/React+Vue/</id>
     <published>2017-07-17T12:43:30.000Z</published>
-    <updated>2017-07-25T12:54:01.000Z</updated>
+    <updated>2017-07-27T05:47:25.000Z</updated>
     
     <summary type="html">
     
@@ -65,7 +89,7 @@
     <link href="http://yoursite.com/2017/07/17/ES6%E8%BF%9B%E9%98%B6/"/>
     <id>http://yoursite.com/2017/07/17/ES6进阶/</id>
     <published>2017-07-17T12:33:51.000Z</published>
-    <updated>2017-07-25T12:54:01.000Z</updated>
+    <updated>2017-07-25T13:02:51.000Z</updated>
     
     <summary type="html">
     

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[async_hooks解析]]></title>
+    <url>%2F2017%2F07%2F28%2Fall-about-async-hooks%2F</url>
+    <content type="text"><![CDATA[本篇文章意图对async_hooks做较为详细的分析，并介绍一些使用案例. async_hooks介绍async_hooks使用案例]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>-node -async_hooks</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用说明]]></title>
     <url>%2F2017%2F07%2F25%2Fguide-paper%2F</url>
     <content type="text"><![CDATA[请按以下步骤发表博文: 1、全局安装hexo1$ npm install hexo -g 2、Clone 源代码master分支存放编译后的代码（html, js, css）,该分支不要改动。source分支存放源代码包含Markdown文件, 需要编写发布博文,请先切换到该分支。 仓库地址:&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/osxfe/osxfe.github.io 3、新建博文1$ hexo new "My New Blog" 4、本地调试1$ hexo server 5、生成静态文件1$ hexo generate 6、发布1$ hexo deploy]]></content>
