@@ -5,6 +5,7 @@ tags:
   -React
   -ES6
 categories: React
+author: Jian Wang
 
 ---
 
