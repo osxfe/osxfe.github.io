@@ -1,5 +1,6 @@
 ---
 title: 使用说明
+author: System
 ---
 请按以下步骤发表博文:
 
