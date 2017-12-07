@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="-Webpack -ES6," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Hash规则B端hash问题1、原本主文档引用的文件，hash生成交由CI处理，但是资源路径配置错误，导致CI替换失败，异步脚本正常更新，但是主文档中引用的是老的文件。 2、chunk文件内容未修改，引用的module Id有变更，但是hash值未更新，导致新老版本加载报错。 3、为了解决CDN上缓存了错误的文件版本hash的问题，引入了webpack-md5-hash重新生成了文件hash规则。">
+<meta name="keywords" content="-Webpack -ES6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hash规则">
+<meta property="og:url" content="http://yoursite.com/2017/12/07/Hash规则/index.html">
+<meta property="og:site_name" content="OSXFE">
+<meta property="og:description" content="Hash规则B端hash问题1、原本主文档引用的文件，hash生成交由CI处理，但是资源路径配置错误，导致CI替换失败，异步脚本正常更新，但是主文档中引用的是老的文件。 2、chunk文件内容未修改，引用的module Id有变更，但是hash值未更新，导致新老版本加载报错。 3、为了解决CDN上缓存了错误的文件版本hash的问题，引入了webpack-md5-hash重新生成了文件hash规则。">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-feuxO7i_WpU/WiisDUxOPBI/AAAAAAAAACc/5ENERNx9V4QDEK41xCp8IR8nojsfU5qWQCHMYCw/I/15120231856243.jpg">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-wlJUDhxMPqU/Wh7zMZjuqfI/AAAAAAAAABk/IhEtsJXAHL0bPovXAgeSV4NB7e-UWXjsQCHMYCw/I/15119373145001.jpg">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-SrxuYiL3LV8/Wh7zM3v49mI/AAAAAAAAABo/empy-1upuAsdOf5JQjUYV0_lfdLKbX5ywCHMYCw/I/15119400009939.jpg">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-FHhesndXOUY/Wh7zNFCIjrI/AAAAAAAAABs/pfTwbRJhcJIVDxYOxWbRAMZqASq52iVXQCHMYCw/I/15119733897082.jpg">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-to9DqvWoUYY/Wh7zNoLxVyI/AAAAAAAAABw/P3PZbCWJBegTFfml526mt5eiq7HMMbesACHMYCw/I/15119741407593.jpg">
+<meta property="og:updated_time" content="2017-12-07T02:54:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hash规则">
+<meta name="twitter:description" content="Hash规则B端hash问题1、原本主文档引用的文件，hash生成交由CI处理，但是资源路径配置错误，导致CI替换失败，异步脚本正常更新，但是主文档中引用的是老的文件。 2、chunk文件内容未修改，引用的module Id有变更，但是hash值未更新，导致新老版本加载报错。 3、为了解决CDN上缓存了错误的文件版本hash的问题，引入了webpack-md5-hash重新生成了文件hash规则。">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/-feuxO7i_WpU/WiisDUxOPBI/AAAAAAAAACc/5ENERNx9V4QDEK41xCp8IR8nojsfU5qWQCHMYCw/I/15120231856243.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/07/Hash规则/"/>
+
+
+
+
+
+  <title>Hash规则 | OSXFE</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">OSXFE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/07/Hash规则/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="osxfe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OSXFE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hash规则</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+            <span class="post-meta-item-text">作者: luoxiao </span>
+            <span class="post-meta-divider">|</span>
+            
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T10:43:30+08:00">
+                2017-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Hash规则"><a href="#Hash规则" class="headerlink" title="Hash规则"></a>Hash规则</h1><h2 id="B端hash问题"><a href="#B端hash问题" class="headerlink" title="B端hash问题"></a>B端hash问题</h2><p>1、原本主文档引用的文件，hash生成交由CI处理，但是资源路径配置错误，导致CI替换失败，异步脚本正常更新，但是主文档中引用的是老的文件。</p>
+<p>2、chunk文件内容未修改，引用的module Id有变更，但是hash值未更新，导致新老版本加载报错。</p>
+<p>3、为了解决CDN上缓存了错误的文件版本hash的问题，引入了webpack-md5-hash重新生成了文件hash规则。</p>
+<p>4、发现webpack-md5-hash插件本身hash策略有问题：module id改变或者异步chunk改变，都不会更新hash值，导致错误的引用。</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="1、hash与chunkHash的区别"><a href="#1、hash与chunkHash的区别" class="headerlink" title="1、hash与chunkHash的区别"></a>1、hash与chunkHash的区别</h3><p>文件的hash指纹通常作为前端静态资源实现增量更新的方案之一，在Webpack编译输出文件的配置过程中，如果需要为文件加入hash指纹，Webpack提供了两个配置项可供使用：hash和chunkhash。那么两者有何区别呢？其各自典型的应用场景又是什么？</p>
+<p><img src="https://lh3.googleusercontent.com/-feuxO7i_WpU/WiisDUxOPBI/AAAAAAAAACc/5ENERNx9V4QDEK41xCp8IR8nojsfU5qWQCHMYCw/I/15120231856243.jpg" alt=""></p>
+<p>首先我们先看一下官方文档对于两者的定义：</p>
+<blockquote>
+<p>[hash] is replaced by the hash of the compilation.</p>
+</blockquote>
+<p><code>hash</code>代表的是compilation的hash值。</p>
+<blockquote>
+<p>[chunkhash] is replaced by the hash of the chunk.</p>
+</blockquote>
+<p><code>chunkhash</code>代表的是chunk的hash值。</p>
+<p>chunkhash很好理解，chunk在Webpack中的含义我们都清楚，简单讲，chunk就是模块。chunkhash也就是根据模块内容计算出的hash值。</p>
+<p>那么该如何理解hash是compilation的hash值这句话呢？首先先讲解一下Webpack中compilation的含义。</p>
+<h4 id="1-1、compilation"><a href="#1-1、compilation" class="headerlink" title="1.1、compilation"></a>1.1、compilation</h4><p>Webpack官方文档中How to write a plugin章节有对compilation的详解。</p>
+<blockquote>
+<p>A compilation object represents a single build of versioned assets. While running Webpack development middleware, a new compilation will be created each time a file change is detected, thus generating a new set of compiled assets. A compilation surfaces information about the present state of module resources, compiled assets, changed files, and watched dependencies.</p>
+</blockquote>
+<p>compilation对象代表某个版本的资源对应的编译进程。当使用Webpack的development中间件时，每次检测到项目文件有改动就会创建一个compilation，进而能够针对改动生产全新的编译文件。compilation对象包含当前模块资源、待编译文件、有改动的文件和监听依赖的所有信息。</p>
+<p>与compilation对应的有个compiler对象，通过对比，可以帮助大家对compilation有更深入的理解。</p>
+<h4 id="1-2、compiler"><a href="#1-2、compiler" class="headerlink" title="1.2、compiler"></a>1.2、compiler</h4><blockquote>
+<p>The compiler object represents the fully configured Webpack environment. This object is built once upon starting Webpack, and is configured with all operational settings including options, loaders, and plugins.</p>
+</blockquote>
+<p>compiler对象代表的是配置完备的Webpack环境。 compiler对象只在Webpack启动时构建一次，由Webpack组合所有的配置项构建生成。</p>
+<p>简单的讲，compiler对象代表的是不变的webpack环境，是针对webpack的；而compilation对象针对的是随时可变的项目文件，只要文件有改动，compilation就会被重新创建。</p>
+<h4 id="1-3、使用对比"><a href="#1-3、使用对比" class="headerlink" title="1.3、使用对比"></a>1.3、使用对比</h4><p>compilation在项目中任何一个文件改动后就会被重新创建，然后webpack计算新的compilation的hash值，这个hash值便是<code>hash</code>。</p>
+<p>如果使用hash作为编译输出文件的hash指纹的话，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">output: &#123;</div><div class="line">    <span class="attr">filename</span>: <span class="string">'[name].[hash:8].js'</span>,</div><div class="line">    <span class="attr">path</span>: __dirname + <span class="string">'/build'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>hash是compilation对象计算所得，而不是具体的项目文件计算所得。所以以上配置的编译输出文件，所有的文件名都会使用相同的hash指纹。如下：</p>
+<p><img src="https://lh3.googleusercontent.com/-wlJUDhxMPqU/Wh7zMZjuqfI/AAAAAAAAABk/IhEtsJXAHL0bPovXAgeSV4NB7e-UWXjsQCHMYCw/I/15119373145001.jpg" alt=""><br>这样带来的问题是，三个js文件任何一个改动都会影响另外两个文件的最终文件名。上线后，另外两个文件的浏览器缓存也全部失效。这肯定不是我们想要的结果。</p>
+<p>那么如何避免这个问题呢？答案就是chunkhash！</p>
+<p>根据chunkhash的定义知道，chunkhash是根据具体模块文件的内容计算所得的hash值，所以某个文件的改动只会影响它本身的hash指纹，不会影响其他文件。配置webpack的output如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">output: &#123;</div><div class="line">    <span class="attr">filename</span>: <span class="string">'[name].[chunkhash:8].js'</span>,</div><div class="line">    <span class="attr">path</span>: __dirname + <span class="string">'/build'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译输出的文件为：</p>
+<p><img src="https://lh3.googleusercontent.com/-SrxuYiL3LV8/Wh7zM3v49mI/AAAAAAAAABo/empy-1upuAsdOf5JQjUYV0_lfdLKbX5ywCHMYCw/I/15119400009939.jpg" alt=""><br>每个文件的hash指纹都不相同，上线后无改动的文件不会失去缓存。</p>
+<blockquote>
+<p>不要在开发环境使用 [chunkhash]/[hash]/[contenthash]，因为不需要在开发环境做持久缓存，而且这样会增加编译时间，开发环境用 [name] 就可以了。</p>
+</blockquote>
+<h3 id="2、contenthash"><a href="#2、contenthash" class="headerlink" title="2、contenthash"></a>2、contenthash</h3><p>webpack将style视为js的一部分，所以在计算chunkhash时，会把所有的js代码和style代码混合在一起计算。比如main.js引用了main.scss:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import &apos;main.scss&apos;;</div><div class="line">alert(&apos;I am main.js&apos;);</div></pre></td></tr></table></figure>
+<p>main.scss的内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">body&#123;</div><div class="line">    color: #000;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>webpack计算chunkhash时，以main.js文件为编译入口，整个chunk的内容会将main.scss的内容也计算在内：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">body&#123;</div><div class="line">    color: #000;</div><div class="line">&#125;</div><div class="line">alert(&apos;I am main.js&apos;);</div></pre></td></tr></table></figure>
+<p>所以，不论是修改了js代码还是scss代码，整个chunk的内容都改变了，计算所得的chunkhash自然就不同了。</p>
+<p>我们一般会通过<code>extract-text-webpack-plugin</code>将样式文件单独抽取出来，但是不管是不是抽取出来了，chunkhash的计算方式还是合在一起算的， js 和 css 输出的文件用的是同一个 chunkhash，所以还是会存在问题。不过，该插件提供了另外一种hash值：<code>contenthash</code>。</p>
+<p>顾名思义，contenthash代表的是文本文件内容的hash值，也就是只有style文件的hash值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new ExtractTextPlugin(&apos;[name].[contenthash].css&apos;);</div></pre></td></tr></table></figure>
+<p>这样，编译出来的js和css文件将会有独立的hash指纹。并且如果我们只是修改了js代码，css的hash值也不会变化的。</p>
+<p>但是，反过来看，当我们如果修改css文件的时候，会发现js的hash还是会变化，还是因为之前提到的，chunkhash会计算js和css为入口，就算css已经提出去了。那么怎么去解决呢？</p>
+<h3 id="3、入坑webpack-md5-hash"><a href="#3、入坑webpack-md5-hash" class="headerlink" title="3、入坑webpack-md5-hash"></a>3、入坑webpack-md5-hash</h3><p>webpack-md5-hash做了些什么？<br>这里提到一个概念叫<code>chunk-hash</code>，并不是webpack中另一种hash值，而是compilation执行生命周期中的一个钩子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">this.applyPlugins(&quot;chunk-hash&quot;, chunk, chunkHash);</div></pre></td></tr></table></figure>
+<p>chunk-hash是在<code>chunhash计算完毕之后执行的</code>，这就意味着如果我们在chunk-hash钩子中可以用新的chunkhash替换已存在的值。webpack-md5-hash便是如此实现的，用了另外一种计算方式，去生成hash值。</p>
+<p>看上去一切都很美好，使用了webpack-md5-hash之后，我们去修改css文件的时候，会发现js的hash没有发生变化。那么webpack-md5-hash到底做了些什么？</p>
+<h4 id="3-1-webpack-md5-hash做了什么？"><a href="#3-1-webpack-md5-hash做了什么？" class="headerlink" title="3.1 webpack-md5-hash做了什么？"></a>3.1 webpack-md5-hash做了什么？</h4><p><img src="https://lh3.googleusercontent.com/-FHhesndXOUY/Wh7zNFCIjrI/AAAAAAAAABs/pfTwbRJhcJIVDxYOxWbRAMZqASq52iVXQCHMYCw/I/15119733897082.jpg" alt=""></p>
+<p>通过模块路径来排序 chunk 的所有依赖模块（仅这个 chunk 中的模块，不含被 CommonsChunkPlugin 剔除的模块），并将这些排序后的模块源代码拼接，最后用 MD5 拼接后内容的 chunkhash。插件这么做的好处是，使 chunkhash 与该 chunk 内代码做直接关联，让 chunk 与其依赖的模块 ID 无关化，无论模块 ID 如何变化，都不会影响父 chunk 的实质内容及 chunkhash。</p>
+<h4 id="3-2-存在的问题？"><a href="#3-2-存在的问题？" class="headerlink" title="3.2 存在的问题？"></a>3.2 存在的问题？</h4><ul>
+<li>当仅有modules id发生改变的时候，hash值不会发生变化（<a href="https://github.com/erm0l0v/webpack-md5-hash/issues/7" target="_blank" rel="external">https://github.com/erm0l0v/webpack-md5-hash/issues/7</a> ）</li>
+<li><p>它的计算方法是只计算模块本身的当前内容（包括同步模块），也就是上文的代码。这种计算方式把异步模块的内容忽略掉了。也就是说，<code>主文件计算hash值时没有把异步模块的内容计算在内</code>。</p>
+<p><img src="https://lh3.googleusercontent.com/-to9DqvWoUYY/Wh7zNoLxVyI/AAAAAAAAABw/P3PZbCWJBegTFfml526mt5eiq7HMMbesACHMYCw/I/15119741407593.jpg" alt=""></p>
+</li>
+</ul>
+<h4 id="3-3-异步模块问题如何导致的"><a href="#3-3-异步模块问题如何导致的" class="headerlink" title="3.3 异步模块问题如何导致的?"></a>3.3 异步模块问题如何导致的?</h4><p>例如：入口文件main.app.js的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">import &apos;../style/main.app.scss&apos;;</div><div class="line"></div><div class="line">console.log(&apos;main&apos;);</div><div class="line">window.onload = function()&#123;</div><div class="line">    require.ensure([],(require)=&gt;&#123;</div><div class="line">        require(&apos;./part.a.js&apos;);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>异步模块part.a.js代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">console.log(&apos;part a&apos;);</div><div class="line">setTimeout(()=&gt;&#123;</div><div class="line">    require.ensure([],(require)=&gt;&#123;</div><div class="line">        require(&apos;./part.b.js&apos;);</div><div class="line">    &#125;);</div><div class="line">&#125;,10000);</div></pre></td></tr></table></figure>
+<p>异步模块part.b.js代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import fn_c from &apos;./part.c.js&apos;;</div><div class="line">import fn_d from &apos;./part.d.js&apos;;</div><div class="line"></div><div class="line">console.log(&apos;part b&apos;);</div></pre></td></tr></table></figure>
+<p>使用webpack将以上源代码进行编译，输出以下文件：</p>
+<hr>
+<ul>
+<li>main.app.[chunkhash].js：主文件；</li>
+<li>part.a.[chunkhash].js：异步模块a；</li>
+<li>part.b.[chunkhash].js：异步模块b；</li>
+<li>main.app.[chunkhash].css：样式文件。</li>
+</ul>
+<hr>
+<p>如果我们修改了part.a.js源码，编译的结果文件哪些文件的hash改变了？ 答案是：只有part.a.[chunkhash].js的hash改变了，其余文件的hash都与修改前一致。那么这种结果是否合理呢？</p>
+<p>我们首先了解一下webpack runtime是如何加载异步模块的？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var head = document.getElementsByTagName(&apos;head&apos;)[0];</div><div class="line">var script = document.createElement(&apos;script&apos;);</div><div class="line">script.type = &apos;text/javascript&apos;;</div><div class="line">script.charset = &apos;utf-8&apos;;</div><div class="line">script.async = true;</div><div class="line"></div><div class="line">script.src = __webpack_require__.p + &quot;js/part/part.&quot; + (&#123;</div><div class="line">    &quot;1&quot;: &quot;a&quot;,</div><div class="line">    &quot;2&quot;: &quot;b&quot;</div><div class="line">    &#125;[chunkId] || chunkId) + &quot;.&quot; + &#123;</div><div class="line">    &quot;1&quot;: &quot;f5ea7d95&quot;,</div><div class="line">    &quot;2&quot;: &quot;b93662b0&quot;</div><div class="line">&#125;[chunkId] + &quot;.js&quot;;</div><div class="line"></div><div class="line">head.appendChild(script);</div></pre></td></tr></table></figure>
+<p>上述代码是编译生成的main.app.[chunkhash].js中实现懒加载的逻辑，原理就是大家熟知的动态生成script标签。但是在对script.src赋值时，webpack有以下三个概念需要知晓：</p>
+<hr>
+<ul>
+<li>chunkId，对应上述代码中的”1”和”2”；</li>
+<li>chunkName，对应上述代码中的”a”和”b”；</li>
+<li>chunkHash，对应上述代码中的”f5ea7d95”和”b93662b0”。</li>
+</ul>
+<hr>
+<p>也就是说，part.a.[chunkhash].js和part.b.[chunkhash].js的hash值是写死在main.app.[chunkhash].js中的。按照之前的编译结果，part.a.[chunkhash].js的hash变了，但是main.app.[chunkhash].js的hash没变，那么用户的浏览器仍然缓存着旧版本的main.app.[chunkhash].js，此时异步加载的part.a.[chunkhash].js仍然是旧版本的文件。这显然是不符合需求的。</p>
+<p>因此懒加载模块的改动经编译，去引用的主文件的hash值没有变化，影响了版本发布。<br>所以建议在采用这种插件的时候，一定要搞清楚它的原理和做的事情，否则容易入坑。</p>
+<h3 id="4、不稳定的chunkhash"><a href="#4、不稳定的chunkhash" class="headerlink" title="4、不稳定的chunkhash"></a>4、不稳定的chunkhash</h3><p>计算 chunk MD5 摘要并修改 chunk 资源文件名是不够的，Chunk 的生成还涉及到依赖解析和模块 ID 分配，例如：我们都会在 webpack 里面定义 common chunk 提取公共代码，虽然只修改了 app.js 的代码，但在最终的构建结果中，vendor.js 的 chunkhash 也被修改了，尽管 vendor.js 的内容没有实质变化。这样我们无法提高缓存的利用率。</p>
+<h4 id="4-1、编译中会导致缓存失效的因素"><a href="#4-1、编译中会导致缓存失效的因素" class="headerlink" title="4.1、编译中会导致缓存失效的因素"></a>4.1、编译中会导致缓存失效的因素</h4><p>在一个 webpack 编译出的分块 (chunk) 文件中，内容分为如下四部分：</p>
+<ul>
+<li>包含的模块的源代码</li>
+<li>webpack 生成的模块 id (module id) (包括包含的模块 id, 以及该模块引用的依赖模块的 id)</li>
+<li>webpack 用于启动运行的 bootstrap runtime</li>
+<li>Chunk ID</li>
+</ul>
+<p>那块这些情况会导致缓存失效：</p>
+<h5 id="1、源代码的变更"><a href="#1、源代码的变更" class="headerlink" title="1、源代码的变更"></a>1、源代码的变更</h5><p>这个不说了</p>
+<h5 id="2、webpack-生成的模块-id变动"><a href="#2、webpack-生成的模块-id变动" class="headerlink" title="2、webpack 生成的模块 id变动"></a>2、webpack 生成的模块 id变动</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">(function (modules) &#123; // webpackBootstrap</div><div class="line">    // ...</div><div class="line">&#125;)([</div><div class="line">/* 0 */</div><div class="line">/***/ function(module, exports, __webpack_require__) &#123;</div><div class="line">    __webpack_require__(1);</div><div class="line">    module.exports = &apos;entry_1.js&apos;;</div><div class="line"></div><div class="line">/***/ &#125;,</div><div class="line">/* 1 */</div><div class="line">/***/ function(module, exports, __webpack_require__) &#123;</div><div class="line">    __webpack_require__(2);</div><div class="line">    module.exports = &apos;test_1.js&apos;;</div><div class="line">/***/ &#125;,</div><div class="line">/* 2 */</div><div class="line">/***/ function(module, exports) &#123;</div><div class="line">    module.exports = &apos;test_2.js&apos;;</div><div class="line">/***/ &#125;</div><div class="line">/******/ ])</div></pre></td></tr></table></figure>
+<p>如上，注释中的 /<em> 0 </em>/ … /<em> 1 </em>/ … 就是该模块对应的 id。<br>默认，模块的 ID 是 webpack 根据依赖的收集顺序递增的正整数，这种 ID 分配方式不太稳定，。假设新增/删除一个模块引用，或者依赖的顺序变一下，计算结果就可能变化，导致一些模块 id 发生变化，最终导致输出 chunk 变化，缓存失效。这一条几乎会导致所有输出的分块内容都发生变化。</p>
+<p><code>如何解决这个问题？</code></p>
+<p>我们需要固定id的计算方式，那么一个模块文件的什么信息是固定的？ —–文件路径<br>可以使用两个插件来解决这个问题：</p>
+<ul>
+<li>NamedModulesPlugin</li>
+<li>HashedModuleIdsPlugin<br>他们都已经被添加到了webpack中，可以直接使用：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new webpack.HashedModuleIdsPlugin()</div></pre></td></tr></table></figure>
+<p>前者将递增 ID 替换为模块相对路径，可读性强，不过，构建出来的 chunk 会充满各种路径，使文件增大。后者是前者的进阶模块，它在其基础上对模块路径进行 MD5 摘要。到此module id的生成规则稳定下来。</p>
+<h5 id="3、webpack-bootstrap-runtime-变动"><a href="#3、webpack-bootstrap-runtime-变动" class="headerlink" title="3、webpack bootstrap runtime 变动"></a>3、webpack bootstrap runtime 变动</h5><p>上面的代码里 /<em> 0 </em>/ … /<em> 1 </em>/ … 对应的都是模块定义，要让程序运行起来还需要一小段启动代码，这个就是 webpack bootstrap runtime，它长这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">(function(modules) &#123; // webpackBootstrap</div><div class="line">/******/    // The module cache</div><div class="line">/******/    var installedModules = &#123;&#125;;</div><div class="line"></div><div class="line">/******/    // The require function</div><div class="line">/******/    function __webpack_require__(moduleId) &#123;</div><div class="line"></div><div class="line">/******/        // Check if module is in cache</div><div class="line">/******/        if(installedModules[moduleId])</div><div class="line">/******/            return installedModules[moduleId].exports;</div><div class="line"></div><div class="line">/******/        // Create a new module (and put it into the cache)</div><div class="line">/******/        var module = installedModules[moduleId] = &#123;</div><div class="line">/******/            exports: &#123;&#125;,</div><div class="line">/******/            id: moduleId,</div><div class="line">/******/            loaded: false</div><div class="line">/******/        &#125;;</div><div class="line"></div><div class="line">/******/        // Execute the module function</div><div class="line">/******/        modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);</div><div class="line"></div><div class="line">/******/        // Flag the module as loaded</div><div class="line">/******/        module.loaded = true;</div><div class="line"></div><div class="line">/******/        // Return the exports of the module</div><div class="line">/******/        return module.exports;</div><div class="line">/******/    &#125;</div><div class="line"></div><div class="line">/******/    // expose the modules object (__webpack_modules__)</div><div class="line">/******/    __webpack_require__.m = modules;</div><div class="line"></div><div class="line">/******/    // expose the module cache</div><div class="line">/******/    __webpack_require__.c = installedModules;</div><div class="line"></div><div class="line">/******/    // __webpack_public_path__</div><div class="line">/******/    __webpack_require__.p = &quot;/build/&quot;;</div><div class="line"></div><div class="line">/******/    // Load entry module and return exports</div><div class="line">/******/    return __webpack_require__(0);</div><div class="line">/******/ &#125;)(/* modules */)</div></pre></td></tr></table></figure>
+<p>其他的都是配置项，启动程序的代码在这一个函数的最后一行：return <strong>webpack_require</strong>(0);，立即执行 id 为0的模块。</p>
+<p>这么看好像每次编译的时候这个 runtime 不会有什么变化，然而实际项目中往往为了缓存利用率以及按需加载引入了多个分块 (chunk)，包括公共分块和按需加载的分块。我们可以看到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">/******/    // This file contains only the entry chunk.</div><div class="line">/******/    // The chunk loading function for additional chunks</div><div class="line">/******/    __webpack_require__.e = function requireEnsure(chunkId, callback) &#123;</div><div class="line">/******/        // &quot;0&quot; is the signal for &quot;already loaded&quot;</div><div class="line">/******/        if(installedChunks[chunkId] === 0)</div><div class="line">/******/            return callback.call(null, __webpack_require__);</div><div class="line"></div><div class="line">/******/        // an array means &quot;currently loading&quot;.</div><div class="line">/******/        if(installedChunks[chunkId] !== undefined) &#123;</div><div class="line">/******/            installedChunks[chunkId].push(callback);</div><div class="line">/******/        &#125; else &#123;</div><div class="line">/******/            // start chunk loading</div><div class="line">/******/            installedChunks[chunkId] = [callback];</div><div class="line">/******/            var head = document.getElementsByTagName(&apos;head&apos;)[0];</div><div class="line">/******/            var script = document.createElement(&apos;script&apos;);</div><div class="line">/******/            script.type = &apos;text/javascript&apos;;</div><div class="line">/******/            script.charset = &apos;utf-8&apos;;</div><div class="line">/******/            script.async = true;</div><div class="line"></div><div class="line">/******/            script.src = __webpack_require__.p + &quot;&quot; + chunkId + &quot;.&quot; + (&#123;&quot;0&quot;:&quot;e_1&quot;,&quot;1&quot;:&quot;e_2&quot;&#125;[chunkId]||chunkId) + &quot;.&quot; + &#123;&quot;0&quot;:&quot;d0c1831ff024c3aeb47a&quot;,&quot;1&quot;:&quot;50dc9cf2b5e52bc9e61a&quot;&#125;[chunkId] + &quot;.js&quot;;</div><div class="line">/******/            head.appendChild(script);</div><div class="line">/******/        &#125;</div><div class="line">/******/    &#125;;</div></pre></td></tr></table></figure>
+<p>这个时候我们可以看看到，最后会有一个文件名映射表，它包含chunks ID 及其对应 chunkhash 的对象，那么runtime 中的文件名映射就跟着改了，这个分块也就被修改了。</p>
+<p><code>如何解决这个问题？</code><br>runtime中变动的就是其中的文件名信息，我们把这总是变动的部分单独拎出来，不要让它影响公共分块或者入口分块。<br>CommonsChunkPlugin可以帮我们抽取出来：</p>
+<blockquote>
+<p>CommonsChunkPlugin 可以用于将模块分离到单独的文件中。然而 CommonsChunkPlugin 有一个较少有人知道的功能是，能够在每次修改后的构建结果中，将 webpack 的样板(boilerplate)和 manifest 提取出来。通过指定 entry 配置中未用到的名称，此插件会自动将我们需要的内容提取到单独的包中：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">new webpack.optimize.CommonsChunkPlugin(&#123;</div><div class="line">  name: &apos;vendor&apos;,</div><div class="line">  minChunks: Infinity</div><div class="line">&#125;),</div><div class="line"></div><div class="line">new webpack.optimize.CommonsChunkPlugin(&#123;</div><div class="line">  name: &apos;manifest&apos;</div><div class="line">&#125;),</div></pre></td></tr></table></figure>
+<p>这样就会生成一个特别小（不足 2kb）的 manifest.js解决了 libs 经常被更新的问题。同时我们可以使用<a href="https://github.com/szrenwei/inline-manifest-webpack-plugin" target="_blank" rel="external">inline-manifest-webpack-plugin</a>将 manifest 转为内联在 html 内的 inline script</p>
+<h5 id="4、Chunk-ID变动"><a href="#4、Chunk-ID变动" class="headerlink" title="4、Chunk ID变动"></a>4、Chunk ID变动</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">webpackJsonp([0,1],[</div><div class="line">/* 0 */</div><div class="line">/***/ function(module, exports, __webpack_require__) &#123;</div><div class="line"></div><div class="line">    __webpack_require__(1);</div><div class="line">    module.exports = &apos;entry.js&apos;;</div><div class="line"></div><div class="line">/***/ &#125;,</div><div class="line">/* 1 */</div><div class="line">/***/ function(module, exports) &#123;</div><div class="line"></div><div class="line">    module.exports = &apos;test.js&apos;;</div><div class="line"></div><div class="line">/***/ &#125;</div><div class="line">]);</div></pre></td></tr></table></figure>
+<p>这里函数调用的第一个参数 [0,1] 就对应了这个分块的 id。<br>同模块 id 一样, 分块 id 的计算与分块引入顺序有关，官方有提供NamedChunksPlugin插件来根据文件名来稳定你的chunkid。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new webpack.NamedChunksPlugin()</div></pre></td></tr></table></figure>
+<h3 id="5、总结"><a href="#5、总结" class="headerlink" title="5、总结"></a>5、总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">output: &#123;</div><div class="line">    filename: &apos;[name].[chunkhash].js&apos;,</div><div class="line">    chunkFilename: &apos;[name].[chunkhash].js&apos;</div><div class="line">&#125;,</div><div class="line">plugins: [</div><div class="line">    // 单独提取 webpack runtime manifest</div><div class="line">    new webpack.optimize.CommonsChunkPlugin(&#123;</div><div class="line">      name: &apos;manifest&apos;</div><div class="line">    &#125;),</div><div class="line"></div><div class="line">    new HtmlWebpackPlugin(&#123;</div><div class="line">      template: &apos;src/pages/index.ejs&apos;,</div><div class="line">      chunks: [&apos;manifest&apos;,  &apos;vendor&apos;]</div><div class="line">    &#125;),</div><div class="line"></div><div class="line">    //内联manifest</div><div class="line">    new InlineManifestWebpackPlugin(),</div><div class="line"></div><div class="line">    // 用文件路径当 id，固定module id</div><div class="line">    new webpack.HashedModuleIdsPlugin(),</div><div class="line"></div><div class="line">    // 文件名固定chunk id</div><div class="line">    new webpack.NamedChunksPlugin(),</div><div class="line"></div><div class="line">    //css 输出按实际内容计算 hash</div><div class="line">    new ExtractTextWebpackPlugin(&#123;filename: &apos;[name].[contenthash].css&apos;&#125;),</div><div class="line">]</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Webpack-ES6/" rel="tag"># -Webpack -ES6</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/07/guide-paper/" rel="next" title="使用说明">
+                <i class="fa fa-chevron-left"></i> 使用说明
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo.png"
+               alt="osxfe" />
+          <p class="site-author-name" itemprop="name">osxfe</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hash规则"><span class="nav-number">1.</span> <span class="nav-text">Hash规则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#B端hash问题"><span class="nav-number">1.1.</span> <span class="nav-text">B端hash问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">1.2.</span> <span class="nav-text">基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、hash与chunkHash的区别"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、hash与chunkHash的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1、compilation"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">1.1、compilation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2、compiler"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">1.2、compiler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3、使用对比"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">1.3、使用对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、contenthash"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、contenthash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、入坑webpack-md5-hash"><span class="nav-number">1.2.3.</span> <span class="nav-text">3、入坑webpack-md5-hash</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-webpack-md5-hash做了什么？"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">3.1 webpack-md5-hash做了什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-存在的问题？"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">3.2 存在的问题？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-异步模块问题如何导致的"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">3.3 异步模块问题如何导致的?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、不稳定的chunkhash"><span class="nav-number">1.2.4.</span> <span class="nav-text">4、不稳定的chunkhash</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1、编译中会导致缓存失效的因素"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">4.1、编译中会导致缓存失效的因素</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、源代码的变更"><span class="nav-number">1.2.4.1.1.</span> <span class="nav-text">1、源代码的变更</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、webpack-生成的模块-id变动"><span class="nav-number">1.2.4.1.2.</span> <span class="nav-text">2、webpack 生成的模块 id变动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、webpack-bootstrap-runtime-变动"><span class="nav-number">1.2.4.1.3.</span> <span class="nav-text">3、webpack bootstrap runtime 变动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、Chunk-ID变动"><span class="nav-number">1.2.4.1.4.</span> <span class="nav-text">4、Chunk ID变动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、总结"><span class="nav-number">1.2.5.</span> <span class="nav-text">5、总结</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">osxfe</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
