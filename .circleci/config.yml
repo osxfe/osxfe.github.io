@@ -3,6 +3,10 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+general:
+    branches:
+        only:
+            - source
 jobs:
   build:
     docker:
@@ -36,8 +40,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       
       - run: npm install  hexo-cli
-
-      - run: git config --global user.email "wanzhi@google.com"
-      - run: git config --global user.name "bb8"
-
-      - run: node_modules/hexo-cli/bin/hexo deploy
+      - run: node_modules/hexo-cli/bin/hexo deploy --generate
