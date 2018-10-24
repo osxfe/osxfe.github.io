@@ -1,6 +1,9 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+        - source
     docker:
       - image: circleci/node:7.10
     working_directory: ~/repo
@@ -14,6 +17,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      
+
       - run: npm install  hexo-cli
       - run: node_modules/hexo-cli/bin/hexo deploy --generate
