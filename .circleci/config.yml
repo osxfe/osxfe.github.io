@@ -10,9 +10,7 @@ general:
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/node:7.10
-      
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -33,7 +31,6 @@ jobs:
       - run: yarn config list
       - run: npm install
 
-
       - save_cache:
           paths:
             - node_modules
@@ -41,3 +38,9 @@ jobs:
       
       - run: npm install  hexo-cli
       - run: node_modules/hexo-cli/bin/hexo deploy --generate
+ deploy-job:
+     steps:
+         - add_ssh_keys:
+             fingerprints:
+                    - "SO:ME:FIN:G:ER:PR:IN:T"
+
