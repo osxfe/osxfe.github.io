@@ -88,3 +88,6 @@ deploy:
   type: git
   repo: git@github.com:osxfe/osxfe.github.io.git
   branch: master
+  name: 0\x11
+  email: wanzhi09@gmail.com
+    
