@@ -1,5 +1,7 @@
 # 创作说明
 
+[![CircleCI](https://circleci.com/gh/osxfe/osxfe.github.io/tree/source.svg?style=svg)](https://circleci.com/gh/osxfe/osxfe.github.io/tree/source)
+
 本项目使用hexo作为静态代码生成器， 源码及默认分支为`source`分支， 部署分支为`master`。 
 
 -如何贡献-
