@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn config list
       - run: npm install
       - save_cache:
