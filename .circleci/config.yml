@@ -9,6 +9,8 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - run: git config --global user.email "wanzhi09@gmail.com"
+      - run: git config --global user.name "0x11"
       - restore_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn config list
@@ -17,6 +19,4 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      
       - run: node_modules/hexo-cli/bin/hexo deploy --generate
