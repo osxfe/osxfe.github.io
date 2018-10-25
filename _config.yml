@@ -4,8 +4,8 @@
 
 # Site
 title: OSXFE
-subtitle:
-description:
+subtitle: 最优秀的国际化前端
+description: 最优秀的国际化前端 境外度假 美团
 author: osxfe
 language: zh-Hans
 timezone:
@@ -73,7 +73,7 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 #theme: landscape
-theme: next
+theme: landscape
 
 
 search:
@@ -88,6 +88,6 @@ deploy:
   type: git
   repo: git@github.com:osxfe/osxfe.github.io.git
   branch: master
-  name: 0\x11
+  name: "0x11"
   email: wanzhi09@gmail.com
     
