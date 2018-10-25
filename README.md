@@ -1,15 +1,17 @@
+[![CircleCI](https://circleci.com/gh/osxfe/osxfe.github.io/tree/source.svg?style=svg)](https://circleci.com/gh/osxfe/osxfe.github.io/tree/source)
+
+
 ## Note:
-* 写博客前请clone 该分支
-* master 分支 用于发布静态文件
-* source 分支 存放源码
+* 本项目使用hexo作为静态代码生成器
+* 写博客前请clone本项目
+* `master` 分支 用于发布静态文件
+* `source` 分支 存放源码
 * 发布完博文一定不要忘记提交源代码(＾Ｕ＾)ノ~ＹＯ
 * 访问地址：https://osxfe.github.io/
 
 ## 创作说明
 
-### 请按以下步骤发表博文:
-
-#### 方式一
+### 方式一
 
 1、Clone 源代码 （已clone跳过）
 
@@ -37,11 +39,7 @@ $ hexo new "My New Blog"
 $ yarn run publish
 ```
 
-#### 方式二
-
-[![CircleCI](https://circleci.com/gh/osxfe/osxfe.github.io/tree/source.svg?style=svg)](https://circleci.com/gh/osxfe/osxfe.github.io/tree/source)
-
-本项目使用hexo作为静态代码生成器， 源码及默认分支为`source`分支， 部署分支为`master`。
+### 方式二
 
 -如何贡献-
 
