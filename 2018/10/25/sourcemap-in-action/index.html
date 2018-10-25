@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SourceMap In Action | SourceMap 实践 | OSXFE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="SourceMap 解析资料： SourceMap文件格式 http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html http://www.alloyteam.com/2014/01/source-map-version-3-introduction/    如何映射 本地保存文件映射，本地保存文件 直接在文件末尾注明位置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SourceMap In Action | SourceMap 实践">
+<meta property="og:url" content="http://yoursite.com/2018/10/25/sourcemap-in-action/index.html">
+<meta property="og:site_name" content="OSXFE">
+<meta property="og:description" content="SourceMap 解析资料： SourceMap文件格式 http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html http://www.alloyteam.com/2014/01/source-map-version-3-introduction/    如何映射 本地保存文件映射，本地保存文件 直接在文件末尾注明位置">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ollp6yeja.bkt.clouddn.com/15138389202320.jpg">
+<meta property="og:image" content="http://ollp6yeja.bkt.clouddn.com/15138390172962.jpg">
+<meta property="og:image" content="http://ollp6yeja.bkt.clouddn.com/15138403410332.jpg">
+<meta property="og:updated_time" content="2018-10-25T02:49:18.125Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SourceMap In Action | SourceMap 实践">
+<meta name="twitter:description" content="SourceMap 解析资料： SourceMap文件格式 http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html http://www.alloyteam.com/2014/01/source-map-version-3-introduction/    如何映射 本地保存文件映射，本地保存文件 直接在文件末尾注明位置">
+<meta name="twitter:image" content="http://ollp6yeja.bkt.clouddn.com/15138389202320.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="OSXFE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">OSXFE</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">最优秀的国际化前端</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-sourcemap-in-action" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/25/sourcemap-in-action/" class="article-date">
+  <time datetime="2018-10-25T02:49:18.125Z" itemprop="datePublished">2018-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SourceMap In Action | SourceMap 实践
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SourceMap-解析"><a href="#SourceMap-解析" class="headerlink" title="SourceMap 解析"></a>SourceMap 解析</h1><h2 id="资料："><a href="#资料：" class="headerlink" title="资料："></a>资料：</h2><ul>
+<li>SourceMap文件格式<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html</a></li>
+<li><a href="http://www.alloyteam.com/2014/01/source-map-version-3-introduction/" target="_blank" rel="noopener">http://www.alloyteam.com/2014/01/source-map-version-3-introduction/</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="如何映射"><a href="#如何映射" class="headerlink" title="如何映射"></a>如何映射</h2><ul>
+<li>本地保存文件映射，本地保存文件</li>
+<li>直接在文件末尾注明位置<ul>
+<li>以JS为例: <code>//@ sourceMappingURL=target.js.map</code></li>
+<li>自己按照URL去映射，对解析工具必须可访问</li>
+</ul>
+</li>
+</ul>
+<h2 id="JS-异常如何解析"><a href="#JS-异常如何解析" class="headerlink" title="JS 异常如何解析"></a>JS 异常如何解析</h2><p>prototype: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/prototype" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/prototype</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Error.prototype</span><br><span class="line">Error.prototype.columnNumber : 非标准</span><br><span class="line">Error.prototype.fileName : 非标准</span><br><span class="line">Error.prototype.lineNumber: 非标准</span><br><span class="line">Error.prototype.message</span><br><span class="line">Error.prototype.name</span><br><span class="line">Error.prototype.stack</span><br><span class="line">Methods</span><br><span class="line">Error.prototype.toSource(): 非标准</span><br><span class="line">Error.prototype.toString()</span><br></pre></td></tr></table></figure>
+<p><img src="http://ollp6yeja.bkt.clouddn.com/15138389202320.jpg" alt=""></p>
+<p>stack属性<br> <img src="http://ollp6yeja.bkt.clouddn.com/15138390172962.jpg" alt=""></p>
+<h3 id="定位位置-解析Error-prototype-stack"><a href="#定位位置-解析Error-prototype-stack" class="headerlink" title="定位位置 = 解析Error.prototype.stack"></a>定位位置 = 解析<code>Error.prototype.stack</code></h3><ul>
+<li>构造: new Error(name)</li>
+<li>默认toString = e.type : e.name</li>
+<li>e.stack = <code>toString()\n + stack frames</code></li>
+<li>过程：解析stack frames -&gt; 获取sourcemap -&gt; consumeSourceMap -&gt; 获取Mapping</li>
+</ul>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: Cannot read property \&apos;toDate\&apos; of undefined    @ Object.onChange (https://osx.dpfile.com/app/overseas-bc-static/static/orderdetails.e91e32130b4a54ea9f01.js:1:722437)    @ t.n.handleChange (https://osx.dpfile.com/app/overseas-bc-static/static/dll.min.d1c4244bfbd687f19b9c4c171fd79de1.js:1:918483)    @ n.clearSelection (https://osx.dpfile.com/app/overseas-bc-static/static/dll.min.d1c4244bfbd687f19b9c4c171fd79de1.js:1:918308)    @ Object.r (https://osx.dpfile.com/app/overseas-bc-static/static/dll.min.d1c4244bfbd687f19b9c4c171fd79de1.js:1:211791)    @ i (https://osx.dpfile.com/app/overseas-bc-static/static/dll.min.d1c4244bfbd687f19b9c4c171fd79de1.js:1:210137)    @ Object.s [as executeDispatchesInOrder] (https://osx.dpfile.com/app/overseas-bc-static/static/dll.min.d1c4244bfbd687f19b9c4c171fd79de1.js:1:210327)    @ p (https://osx.dpfile.com/app/overseas-bc-static/static/dll.min.d1c4244bfbd687f19b9c4c171fd79de1.js:1:175391)    @ m (https://osx.dpfile.com/app/overseas-bc-static/static/dll.min.d1c4244bfbd687f19b9c4c171fd79de1.js:1:175517)</span><br></pre></td></tr></table></figure>
+<p><img src="http://ollp6yeja.bkt.clouddn.com/15138403410332.jpg" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/25/sourcemap-in-action/" data-id="cjno04os60007cwvyya79poru" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/25/guide-paper/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用说明
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/07/Hash规则/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hash规则</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-ES6/">-React -ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack-ES6/">-Webpack -ES6</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/React-ES6/" style="font-size: 10px;">-React -ES6</a> <a href="/tags/Webpack-ES6/" style="font-size: 10px;">-Webpack -ES6</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/25/guide-paper/">使用说明</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/25/sourcemap-in-action/">SourceMap In Action | SourceMap 实践</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/07/Hash规则/">Hash规则</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/17/React/">React原理浅谈</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 osxfe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
